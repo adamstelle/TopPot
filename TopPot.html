@@ -1,17 +1,33 @@
 <script>
 
-// Create 
+// Generate random foot traffic value from range
+	function getHourlyTraffic(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+// Create top-level cunstructor object
 	function Branch(location,trafficmin, trafficmax, percentEntered ,donuts) {
+		var hoursopen = 11
+		var currentHour = 0
+		var branchOpen = time < hoursopen
+		var totaltraffic = [];
 		this.location = location;
 		this.percentEntered = percentEntered;
 		this.donuts = donuts;
-		this.hoursopen = 11;
+		this.trafficmin = trafficmin;
+		this.trafficmax = trafficmax;
+		this.totaltraffic = totaltraffic 
+// Assign randomized hourly values for foot traffic within the range
 		this.foottraffic = function() {
-			while 
-
+			while (branchOpen = true) {
+				totaltraffic.push(getHourlyTraffic(trafficmin,trafficmax));
+				currentHour ++ 1;
+			}
+			console.log(totaltraffic)
 		}
 	}
 
+// Call instances of custructor object
 	var downtown  = new Branch("Downtown",80,220,10,4)
 	var capitolHill = new Branch("Capitol Hill",5,45,45,2)
 	var southLakeUnion = new Branch("South Lake Union",180,250,5,6)

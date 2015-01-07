@@ -1,37 +1,70 @@
+<!DOCTYPE>
+<html>
+
+<h1>Top Pot Donus Sales</h1>
+<a href="http://www.toppotdoughnuts.com/"><img src="http://livingsnoqualmie.com/wp-content/uploads/2013/01/TopPot_Logo.jpg"></a>
+
+<table id="TopPot">
+	<tr>
+		<td>Downtown</td>
+		<td>Capitol Hill</td>
+		<td>South Lake Union</td>
+		<td>Wedgewood</td>
+		<td>Ballard</td>
+	</tr>
+	<tr>
+		<td>
+
 <script>
+
+// Basic Program Structure:
+// 1. Create constructor object for all store branches, with parameters for all key user inputs (location, the range of hourly foot traffic, the % of people entering the store, and # of donuts sold per person)
+// 2. Within the provided range, calculate random hourly values of foot traffic per location.
+// 3. Multiply hourly foot traffic by the % entered and avg. # of donuts sold to generate # of total sales per hour, and store these values in an array.
+// 4. Display the number of donuts sold per hour per branch and total number in the browser.
+
 
 // Generate random foot traffic value from range
 	function getHourlyTraffic(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-// Create top-level cunstructor object
-	function Branch(location,trafficmin, trafficmax, percentEntered ,donuts) {
-		var hoursopen = 11
+// Create top-level constructor object
+	function Branch(location,trafficMin,trafficMax,conversion,donuts) {
+		var hoursOpen = 11
 		var currentHour = 0
-		var branchOpen = time < hoursopen
-		var totaltraffic = [];
+// Creates array to store traffic by hour
+		var hourlySales = [];
+		this.hourlySales = hourlySales;
 		this.location = location;
-		this.percentEntered = percentEntered;
+		this.conversion = conversion;
 		this.donuts = donuts;
-		this.trafficmin = trafficmin;
-		this.trafficmax = trafficmax;
-		this.totaltraffic = totaltraffic 
-// Assign randomized hourly values for foot traffic within the range
-		this.foottraffic = function() {
-			while (branchOpen = true) {
-				totaltraffic.push(getHourlyTraffic(trafficmin,trafficmax));
-				currentHour ++ 1;
-			}
-			console.log(totaltraffic)
+		this.trafficMin = trafficMin;
+		this.trafficMax = trafficMax;
+// Assign randomized hourly values for foot traffic within the range	
+		this.getTotals = function() {
+			while (currentHour < hoursOpen) {
+				this.hourlySales.push(Math.round((getHourlyTraffic(trafficMin,trafficMax)) * this.conversion	* this.donuts))
+				currentHour++;
+			};
+		console.log(hourlySales);
+		document.write(hourlySales);
+// Multiply traffic values in array by conversion & avg # donuts, then store in array
 		}
 	}
 
 // Call instances of custructor object
-	var downtown  = new Branch("Downtown",80,220,10,4)
-	var capitolHill = new Branch("Capitol Hill",5,45,45,2)
-	var southLakeUnion = new Branch("South Lake Union",180,250,5,6)
-	var wedgeWood new Branch("Wedgewood",20,60,20,1.5)
-	var ballard = new Branch("Ballard",25,175,33,1)
+	var downtown  = new Branch("Downtown",80,220,.10,4)
+	var capitolHill = new Branch("Capitol Hill",5,45,.45,2)
+	var southLakeUnion = new Branch("South Lake Union",180,250,.05,6)
+	var wedgeWood = new Branch("Wedgewood",20,60,20,.20,1.5)
+	var ballard = new Branch("Ballard",25,175,.33,1)
+
+// Run the functions
+downtown.getTotals();
+capitolHill.getTotals();
+southLakeUnion.getTotals();
+wedgeWood.getTotals();
+ballard.getTotals();
 
 </script>

@@ -1,39 +1,74 @@
-<script>
-  var downtown, capitolHill, southLakeUnion, wedgeWood, ballard;
-  function getHourlyTraffic(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function Branch(location,trafficMin,trafficMax,conversion,donuts) {
-    var hoursOpen = 11
-    var currentHour = 0
-    var hourlySales = [];
-    this.hourlySales = hourlySales;
-    this.location = location;
-    this.conversion = conversion;
-    this.donuts = donuts;
-    this.trafficMin = trafficMin;
-    this.trafficMax = trafficMax;
-    this.getTotals = function() {
-      this.hourlySales.push(this.location);
-      while (currentHour < hoursOpen) {
-        this.hourlySales.push(Math.round((getHourlyTraffic(trafficMin,trafficMax)) * this.conversion  * this.donuts))
-        currentHour++;
-      };
-    console.log(hourlySales);
+<!DOCTYPE html>
+<html>
+  <script>
+    var submitted = false;
+    var stores = [];
+    var downtown, capitolHill, southLakeUnion, wedgeWood, ballard;
+    function getHourlyTraffic(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-  }
 
-  downtown        = new Branch("Downtown",        80,  220, .10,    4); 
-  capitolHill     = new Branch("Capitol Hill",    5,   45,  .45,    2); 
-  southLakeUnion  = new Branch("South Lake Union",180, 250, .05,    6); 
-  wedgeWood       = new Branch("Wedgewood",       20,  60,  .20,  1.5); 
-  ballard         = new Branch("Ballard",         25,  175, .33,    1); 
+    function Branch(location,trafficMin,trafficMax,conversion,donuts) {
+      var hoursOpen     = 11;
+      var currentHour   = 0;
+      var hourlySales   = [];
+      this.hourlySales  = hourlySales;
+      this.location     = location;
+      this.conversion   = conversion;
+      this.donuts       = donuts;
+      this.trafficMin   = trafficMin;
+      this.trafficMax   = trafficMax;
+      this.getTotals    = function() {
+        this.hourlySales.push(this.location);
+        while (currentHour < hoursOpen) {
+          this.hourlySales.push(Math.ceil((getHourlyTraffic(trafficMin,trafficMax)) * this.conversion  * this.donuts))
+          currentHour++;
+        };
+        console.log(hourlySales);
+      }
+    }
 
-  downtown.getTotals();
-  capitolHill.getTotals();
-  southLakeUnion.getTotals();
-  wedgeWood.getTotals();
-  ballard.getTotals();
+    function getStoreInputs() {
+      var i = 0
+      while (i < 5) {
+        var storeInputs = [];
+        storeInputs.push(document.getElementById(i));
+        i++
+      }
+      console.log(storeInputs);
+    }
+    
+    
+    // Need a user-inputted trigger to retrieve and store the inputs (call getInputs function)
 
-</script>
+    stores.push(new Branch("Downtown",        80,  220, .10,    4)); 
+    stores.push(new Branch("Capitol Hill",    5,   45,  .45,    2)); 
+    stores.push(new Branch("South Lake Union",180, 250, .05,    6)); 
+    stores.push(new Branch("Wedgewood",       20,  60,  .20,  1.5)); 
+    stores.push(new Branch("Ballard",         25,  175, .33,    1)); 
+
+    for(index in stores) {
+      stores[index].getTotals();
+    }
+
+  </script>
+
+  <head>
+    <title>Adam's Top Pot Donut Merch Tool</title>
+  </head>
+  <body>
+    <h1>Top Pot Donuts Inventory Management</h1>
+    <h2>Welcome! Please fill in the forms below. When you are done completing all forms, hit submit.</h2>
+    <form id = "0" name="Store1" action="getInputs" method="get">
+      Store Location:              <input id="0" type="text" name="location" /><br />
+      Minimum Hourly Foot traffic: <input id="1" type="text" name="trafficMin" /><br />
+      Maximum Hourly Foot traffic: <input id="2" type="text" name="trafficMax" /><br />
+      Conversion Rate:             <input id="3" type="text" name="conversion" /><br />
+      Number of donuts sold PP     <input id="4" type="text" name="donuts"/><br />
+      <input type="button" name="submit" value="Click" onClick="getStoreInputs(this.form)"/>
+    </form>
+    <table>
+  </body>
+</html>
+
+

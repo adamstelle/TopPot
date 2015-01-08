@@ -24,23 +24,21 @@
 		this.trafficMax = trafficMax;
 // Assign randomized hourly values for foot traffic within the range	
 		this.getTotals = function() {
+			this.hourlySales.push(this.location);
 			while (currentHour < hoursOpen) {
 				this.hourlySales.push(Math.round((getHourlyTraffic(trafficMin,trafficMax)) * this.conversion	* this.donuts))
 				currentHour++;
 			};
 		console.log(hourlySales);
-		document.write(hourlySales);
 		}
 	}
 
-// Call instances of custructor object
 	var downtown  = new Branch("Downtown",80,220,.10,4)
 	var capitolHill = new Branch("Capitol Hill",5,45,.45,2)
 	var southLakeUnion = new Branch("South Lake Union",180,250,.05,6)
 	var wedgeWood = new Branch("Wedgewood",20,60,20,.20,1.5)
 	var ballard = new Branch("Ballard",25,175,.33,1)
 
-// Run the functions
 downtown.getTotals();
 capitolHill.getTotals();
 southLakeUnion.getTotals();

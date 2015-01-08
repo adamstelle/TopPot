@@ -1,48 +1,39 @@
-<!DOCTYPE>
-<html>
-
-<h1>Top Pot Donus Sales</h1>
-<a href="http://www.toppotdoughnuts.com/"><img src="http://livingsnoqualmie.com/wp-content/uploads/2013/01/TopPot_Logo.jpg"></a>
-
 <script>
-// Generate random foot traffic value from range
-	function getHourlyTraffic(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
+  var downtown, capitolHill, southLakeUnion, wedgeWood, ballard;
+  function getHourlyTraffic(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-// Create top-level constructor object
-	function Branch(location,trafficMin,trafficMax,conversion,donuts) {
-		var hoursOpen = 11
-		var currentHour = 0
-// Creates array to store traffic by hour
-		var hourlySales = [];
-		this.hourlySales = hourlySales;
-		this.location = location;
-		this.conversion = conversion;
-		this.donuts = donuts;
-		this.trafficMin = trafficMin;
-		this.trafficMax = trafficMax;
-// Assign randomized hourly values for foot traffic within the range	
-		this.getTotals = function() {
-			this.hourlySales.push(this.location);
-			while (currentHour < hoursOpen) {
-				this.hourlySales.push(Math.round((getHourlyTraffic(trafficMin,trafficMax)) * this.conversion	* this.donuts))
-				currentHour++;
-			};
-		console.log(hourlySales);
-		}
-	}
+  function Branch(location,trafficMin,trafficMax,conversion,donuts) {
+    var hoursOpen = 11
+    var currentHour = 0
+    var hourlySales = [];
+    this.hourlySales = hourlySales;
+    this.location = location;
+    this.conversion = conversion;
+    this.donuts = donuts;
+    this.trafficMin = trafficMin;
+    this.trafficMax = trafficMax;
+    this.getTotals = function() {
+      this.hourlySales.push(this.location);
+      while (currentHour < hoursOpen) {
+        this.hourlySales.push(Math.round((getHourlyTraffic(trafficMin,trafficMax)) * this.conversion  * this.donuts))
+        currentHour++;
+      };
+    console.log(hourlySales);
+    }
+  }
 
-	var downtown  = new Branch("Downtown",80,220,.10,4)
-	var capitolHill = new Branch("Capitol Hill",5,45,.45,2)
-	var southLakeUnion = new Branch("South Lake Union",180,250,.05,6)
-	var wedgeWood = new Branch("Wedgewood",20,60,20,.20,1.5)
-	var ballard = new Branch("Ballard",25,175,.33,1)
+  downtown        = new Branch("Downtown",        80,  220, .10,    4); 
+  capitolHill     = new Branch("Capitol Hill",    5,   45,  .45,    2); 
+  southLakeUnion  = new Branch("South Lake Union",180, 250, .05,    6); 
+  wedgeWood       = new Branch("Wedgewood",       20,  60,  .20,  1.5); 
+  ballard         = new Branch("Ballard",         25,  175, .33,    1); 
 
-downtown.getTotals();
-capitolHill.getTotals();
-southLakeUnion.getTotals();
-wedgeWood.getTotals();
-ballard.getTotals();
+  downtown.getTotals();
+  capitolHill.getTotals();
+  southLakeUnion.getTotals();
+  wedgeWood.getTotals();
+  ballard.getTotals();
 
 </script>
